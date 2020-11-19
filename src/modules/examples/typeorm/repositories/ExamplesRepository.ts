@@ -16,7 +16,7 @@ class ExamplesRepository implements IExamplesRepository {
   public async findById(id: string): Promise<Example | undefined> {
     const example = await this.ormRepository.findOne({
       where: {
-        _id: id,
+        id,
       },
     });
 

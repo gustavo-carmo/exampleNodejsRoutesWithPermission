@@ -32,11 +32,11 @@ export default class UsersController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email } = request.body;
+    const { name, email, password, roles } = request.body;
 
     const createUserService = container.resolve(CreateUserService);
 
-    const user = await createUserService.execute({ name, email });
+    const user = await createUserService.execute({ name, email, password, roles });
 
     return response.json(user);
   }

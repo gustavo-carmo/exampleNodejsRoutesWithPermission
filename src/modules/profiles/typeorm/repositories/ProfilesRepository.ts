@@ -16,7 +16,7 @@ class ProfilesRepository implements IProfilesRepository {
   public async findById(id: string): Promise<Profile | undefined> {
     const profile = await this.ormRepository.findOne({
       where: {
-        _id: id,
+        id,
       },
     });
 

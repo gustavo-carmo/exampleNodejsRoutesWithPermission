@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
-import ProfilesController from '../controllers/ProfilesController';
+import RolesController from '../controllers/RolesController';
 
-const profilesRouter = Router();
-const profilesController = new ProfilesController();
+const rolesRouter = Router();
+const rolesController = new RolesController();
 
-profilesRouter.get(
+rolesRouter.get(
   '/',
   celebrate({
     [Segments.QUERY]: {
@@ -14,20 +14,20 @@ profilesRouter.get(
       description: Joi.string(),
     },
   }),
-  profilesController.index,
+  rolesController.index,
 );
 
-profilesRouter.get(
+rolesRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
-  profilesController.show,
+  rolesController.show,
 );
 
-profilesRouter.post(
+rolesRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -35,10 +35,10 @@ profilesRouter.post(
       description: Joi.string().required(),
     },
   }),
-  profilesController.create,
+  rolesController.create,
 );
 
-profilesRouter.put(
+rolesRouter.put(
   '/:id',
   celebrate({
     [Segments.BODY]: {
@@ -49,17 +49,17 @@ profilesRouter.put(
       id: Joi.string().uuid().required(),
     },
   }),
-  profilesController.update,
+  rolesController.update,
 );
 
-profilesRouter.delete(
+rolesRouter.delete(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
-  profilesController.delete,
+  rolesController.delete,
 );
 
-export default profilesRouter;
+export default rolesRouter;
