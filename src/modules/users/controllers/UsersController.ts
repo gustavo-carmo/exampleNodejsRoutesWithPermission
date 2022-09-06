@@ -36,7 +36,12 @@ export default class UsersController {
 
     const createUserService = container.resolve(CreateUserService);
 
-    const user = await createUserService.execute({ name, email, password, roles });
+    const user = await createUserService.execute({
+      name,
+      email,
+      password,
+      roles,
+    });
 
     return response.json(user);
   }

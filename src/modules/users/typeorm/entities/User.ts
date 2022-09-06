@@ -39,10 +39,10 @@ class User {
   @ManyToMany(() => Role)
   @JoinTable({
     name: 'users_roles',
-    joinColumns: [{name: 'user_id'}],
+    joinColumns: [{ name: 'user_id' }],
     inverseJoinColumns: [{ name: 'role_id' }],
   })
-  roles: Role[]
+  roles: Role[];
 
   @CreateDateColumn()
   created_at: Date;

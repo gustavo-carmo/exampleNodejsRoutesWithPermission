@@ -1,7 +1,12 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class CreateProfileRoles1605574033499 implements MigrationInterface {
-
+export default class CreateProfileRoles1605574033499
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.createTable(
       new Table({
@@ -9,44 +14,43 @@ export default class CreateProfileRoles1605574033499 implements MigrationInterfa
         columns: [
           {
             name: 'profile_id',
-            type: 'uuid'
+            type: 'uuid',
           },
           {
             name: 'role_id',
-            type: 'uuid'
-          }
-        ]
-      })
+            type: 'uuid',
+          },
+        ],
+      }),
     );
 
-    await queryRunner.createForeignKeys(
-      'profiles_roles',
-      [
-        new TableForeignKey({
-          name: 'profiles_roles_profile',
-          columnNames: ['profile_id'],
-          referencedColumnNames: ['id'],
-          referencedTableName: 'profiles',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-        }),
-        new TableForeignKey({
-          name: 'profiles_roles_role',
-          columnNames: ['role_id'],
-          referencedColumnNames: ['id'],
-          referencedTableName: 'roles',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
-        }),
-      ]
-    );
+    await queryRunner.createForeignKeys('profiles_roles', [
+      new TableForeignKey({
+        name: 'profiles_roles_profile',
+        columnNames: ['profile_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'profiles',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+      new TableForeignKey({
+        name: 'profiles_roles_role',
+        columnNames: ['role_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'roles',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.dropForeignKey('profiles_roles', 'profiles_roles_profile');
+    await queryRunner.dropForeignKey(
+      'profiles_roles',
+      'profiles_roles_profile',
+    );
     await queryRunner.dropForeignKey('profiles_roles', 'profiles_roles_role');
 
     await queryRunner.dropTable('profiles_roles');
   }
-
 }

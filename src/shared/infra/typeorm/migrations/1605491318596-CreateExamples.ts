@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class CreateExamples1605491318596 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    /*
+    EXAMPLE CREATION TABLE BY TYPEORM
+
     await queryRunner.createTable(
       new Table({
         name: 'examples',
@@ -34,9 +38,11 @@ export default class CreateExamples1605491318596 implements MigrationInterface {
         ],
       }),
     );
+    */
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('examples');
+    // EXAMPLE DELETING TABLE BY TYPEORM
+    // await queryRunner.dropTable('examples');
   }
 }

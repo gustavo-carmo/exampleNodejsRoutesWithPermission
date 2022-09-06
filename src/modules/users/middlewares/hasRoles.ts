@@ -9,13 +9,13 @@ interface ITokenPayload {
   userRoles: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function hasRoles(roles: string[]) {
-
   const validateUserAuthorization = (
     request: Request,
     response: Response,
     next: NextFunction,
-  ) => {
+  ): void => {
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
@@ -29,17 +29,20 @@ export default function hasRoles(roles: string[]) {
 
       const { userRoles } = decoded as ITokenPayload;
 
-      const existsRoles = userRoles.some(role => roles.includes(role));
+      const existsRoles = userRoles.some((role) => roles.includes(role));
 
       if (!existsRoles) {
-        throw new AppError("I'm sorry. But you don't have the permission!", 403);
+        throw new AppError(
+          "I'm sorry. But you don't have the permission!",
+          403,
+        );
       }
 
       next();
     } catch {
       throw new AppError("I'm sorry. But you don't have the permission!", 403);
     }
-  }
+  };
 
   return validateUserAuthorization;
 }

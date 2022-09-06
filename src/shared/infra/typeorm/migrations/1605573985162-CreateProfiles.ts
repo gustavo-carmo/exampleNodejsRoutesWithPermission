@@ -11,11 +11,11 @@ export default class CreateProfiles1605573985162 implements MigrationInterface {
             isPrimary: true,
             type: 'uuid',
             generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()'
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
-            type: 'varchar'
+            type: 'varchar',
           },
           {
             name: 'description',
@@ -29,10 +29,10 @@ export default class CreateProfiles1605573985162 implements MigrationInterface {
           {
             name: 'updated_at',
             type: 'timestamp',
-            default: 'now()'
-          }
-        ]
-      })
+            default: 'now()',
+          },
+        ],
+      }),
     );
   }
 
