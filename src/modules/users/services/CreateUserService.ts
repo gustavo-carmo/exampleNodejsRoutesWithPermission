@@ -1,8 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../repositories/IUsersRepository';
 import IRolesRepository from '@modules/roles/repositories/IRolesRepository';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '../typeorm/entities/User';
 
@@ -26,7 +26,7 @@ class CreateUserService {
     name,
     email,
     password,
-    roles
+    roles,
   }: IRequest): Promise<User | undefined> {
     // TODO - Change this find to a findByName - The generic find, search by like and we need validate if the name is exactly the same
     let users = await this.usersRepository.find({ name });
@@ -50,7 +50,7 @@ class CreateUserService {
       name,
       email,
       password,
-      roles: existsRoles
+      roles: existsRoles,
     });
 
     return user;

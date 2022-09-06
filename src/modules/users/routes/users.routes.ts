@@ -2,10 +2,14 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import UsersController from '../controllers/UsersController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import hasRoles from '../middlewares/hasRoles';
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
+usersRouter.use(ensureAuthenticated);
+usersRouter.use(hasRoles(['USERS_READ', 'USERS_EDIT', 'USERS_ALL']));
 usersRouter.get(
   '/',
   celebrate({
@@ -27,6 +31,7 @@ usersRouter.get(
   usersController.show,
 );
 
+usersRouter.use(hasRoles(['USERS_EDIT', 'USERS_ALL']));
 usersRouter.post(
   '/',
   celebrate({
@@ -54,6 +59,7 @@ usersRouter.put(
   usersController.update,
 );
 
+usersRouter.use(hasRoles(['USERS_ALL']));
 usersRouter.delete(
   '/:id',
   celebrate({
